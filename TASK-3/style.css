@@ -107,6 +107,38 @@ nav b {
     background: #211d3b;
     text-align: left;
 }
-.result { display: none; 
-    min-height: 100vh; 
+.result {
+    display: none;
+    min-height: 100vh;
+    padding: 25px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(13, 11, 31, 0.9);
 }
+
+.result-card {
+    width: 420px;
+    padding: 40px;
+    background: #17142d;
+    border: 1px solid #403866;
+    border-radius: 24px;
+    text-align: center;
+}
+.result-card h1 {
+    margin-bottom: 20px;}
+#finalScore {
+    color: #a78bfa;
+    font-size: 40px;
+    margin-bottom: 10px;}
+#resultMessage {
+    color: #aaa6bd;
+    margin-bottom: 25px;}
+.summary {
+    background: #211d3b;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 25px;}
+.summary p {
+    margin: 10px 0;}
+#reattempt {
+    width: 100%;}

@@ -21,6 +21,7 @@ const attempted = document.getElementById("attempted");
 const unattempted = document.getElementById("unattempted");
 const reviewed = document.getElementById("reviewed");
 const endTest = document.getElementById("endTest");
+const themeToggle = document.getElementById("themeToggle");
 
 let questions = [];
 let current = 0;
@@ -209,4 +210,13 @@ reattempt.onclick = () => {
 result.style.display = "none";
     quiz.style.display = "block";
  showQuestion();
+};
+themeToggle.onclick = () => {
+    document.body.classList.toggle("light");
+
+    if (document.body.classList.contains("light")) {
+        themeToggle.textContent = "Dark Mode";
+    } else {
+        themeToggle.textContent = "Light Mode";
+    }
 };

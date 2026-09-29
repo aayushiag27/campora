@@ -184,3 +184,39 @@ nav b {
 #reattempt {
     width: 100%;
 }
+body.light {
+    background: #f5f3ff;
+    color: #1f1b2d;
+}
+
+body.light .login-container,
+body.light .quiz,
+body.light .result {
+    background: rgba(245, 243, 255, 0.95);
+}
+
+body.light .login-card,
+body.light nav,
+body.light .result-card {
+    background: white;
+    border-color: #ddd6fe;
+}
+
+body.light input {
+    background: #f5f3ff;
+    color: #1f1b2d;
+    border-color: #c4b5fd;
+}
+
+body.light .status-bar button,
+body.light #options button,
+body.light .summary {
+    background: #ede9fe;
+    color: #1f1b2d;
+}
+
+body.light #number,
+body.light .login-card p,
+body.light #resultMessage {
+    color: #6b6680;
+}

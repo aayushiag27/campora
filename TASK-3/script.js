@@ -152,6 +152,44 @@ function endQuiz() {
   quiz.style.display = "none";
     result.style.display = "flex";
 }
+attempted.onclick = () => {
+    let index = answered.findIndex((value, i) => value && i > current);
+
+    if (index === -1) {
+        index = answered.findIndex(value => value);
+    }
+
+    if (index !== -1) {
+        current = index;
+        showQuestion();
+    }
+};
+
+unattempted.onclick = () => {
+    let index = answered.findIndex((value, i) => !value && i > current);
+
+    if (index === -1) {
+        index = answered.findIndex(value => !value);
+    }
+
+    if (index !== -1) {
+        current = index;
+        showQuestion();
+    }
+};
+
+reviewed.onclick = () => {
+    let index = marked.findIndex((value, i) => value && i > current);
+
+    if (index === -1) {
+        index = marked.findIndex(value => value);
+    }
+
+    if (index !== -1) {
+        current = index;
+        showQuestion();
+    }
+};
 reattempt.onclick = () => {
     current = 0;
     time = 600;

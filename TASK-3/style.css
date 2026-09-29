@@ -26,7 +26,7 @@
     width: 420px;
     padding: 45px;
     background: #17142d;
-    border: 1px solid #302b52;
+    border: 1px solid #1d1b23;
     border-radius: 24px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
@@ -74,7 +74,7 @@
     margin-bottom: 15px;
 }
 #username:focus {
-    border-color: #52220e;
+    border-color: #1f1510;
 }
 #username::placeholder {
     color: #77728c;

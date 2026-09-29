@@ -220,3 +220,34 @@ body.light .login-card p,
 body.light #resultMessage {
     color: #6b6680;
 }
+@media (max-width: 600px) {
+    .login-card,
+    .result-card {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .quiz {
+        padding: 15px;
+    }
+
+ nav {
+        padding: 15px;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+ .status-bar {
+        flex-wrap: wrap;
+    }
+   .status-bar button {
+        flex: 1;
+        min-width: 100px;
+    }
+ #question {
+        font-size: 22px; }
+   #review,
+    #next,
+    #endTest {
+        width: 100%;
+        margin-top: 8px;   }
+}

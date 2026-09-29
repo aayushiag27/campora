@@ -107,3 +107,6 @@ nav b {
     background: #211d3b;
     text-align: left;
 }
+.result { display: none; 
+    min-height: 100vh; 
+}

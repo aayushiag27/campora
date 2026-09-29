@@ -30,7 +30,19 @@
         <button id="review" tabindex="0">Mark for Review</button>
         <button id="next" tabindex="0">Next</button>
     </div>
-    <div class="result" id="result"></div>
+   <div class="result" id="result">
+    <div class="result-card">
+        <h1>Quiz Completed!</h1>
+        <h2 id="finalScore"></h2>
+        <p id="resultMessage"></p>
+  <div class="summary">
+            <p>Correct: <span id="correctCount"></span></p>
+            <p>Incorrect: <span id="incorrectCount"></span></p>
+            <p>Unattempted: <span id="unattemptedCount"></span></p>
+        </div>
+    <button id="reattempt">Reattempt Quiz</button>
+    </div>
+</div>
  <script src="script.js"></script>
 </body>
 </html>

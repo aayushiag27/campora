@@ -5,67 +5,88 @@ const quiz = document.getElementById("quiz");
 const name = document.getElementById("name");
 const question = document.getElementById("question");
 const options = document.getElementById("options");
+const review = document.getElementById("review");
+const next = document.getElementById("next");
+
 let questions = [];
 let current = 0;
 let time = 600;
 let score = 0;
 let answered = [];
+let marked = [];
 fetch("questions.json")
     .then(res => res.json())
     .then(data => {
         questions = data;
-        answered = new Array(questions.length).fill(false);});
+        answered = new Array(questions.length).fill(false);
+        marked = new Array(questions.length).fill(false);
+    });
 startBtn.onclick = () => {
     if (!username.value.trim()) {
         alert("Please enter your name");
-        return; }
- name.textContent = username.value;
+        return;  }
+  name.textContent = username.value;
     login.style.display = "none";
     quiz.style.display = "block";
-    showQuestion();};
+    showQuestion();
+};
 function showQuestion() {
     let q = questions[current];
-question.textContent = q.question;
+ question.textContent = q.question;
  document.getElementById("number").textContent =
         `Question ${current + 1} of ${questions.length}`;
-   options.innerHTML = q.options.map(option =>
+ options.innerHTML = q.options.map(option =>
         `<button tabindex="0">${option}</button>`
     ).join("");
- document.querySelectorAll("#options button").forEach(button => {
+  document.querySelectorAll("#options button").forEach(button => {
         button.onclick = () => selectAnswer(button);
-    });}
+    });
+  if (marked[current]) {
+        review.textContent = "Unmark Review";
+    } else {
+        review.textContent = "Mark for Review";
+    }
+}
 function selectAnswer(button) {
     if (answered[current]) return;
   let q = questions[current];
-answered[current] = true;
+  answered[current] = true;
  document.querySelectorAll("#options button").forEach(btn => {
         btn.disabled = true;
- if (btn.textContent === q.answer) {
+  if (btn.textContent === q.answer) {
             btn.style.background = "#22c55e";
-        } });
- if (button.textContent === q.answer) {
-        score += 4;
-    } else {
+        }
+    });
+if (button.textContent === q.answer) {
+        score += 4; }
+         else {
         score -= 1;
-        button.style.background = "#ef4444";
-    }
-console.log("Score:", score);
-}
-document.getElementById("next").onclick = () => {
+        button.style.background = "#ef4444"; }
+ console.log("Score:", score);}
+review.onclick = () => {
+    marked[current] = !marked[current];
+
+    if (marked[current]) {
+        review.textContent = "Unmark Review";
+        review.style.background = "#9333ea";
+    } else {
+        review.textContent = "Mark for Review";
+        review.style.background = "#8b5cf6";  }};
+next.onclick = () => {
     if (current < questions.length - 1) {
         current++;
         showQuestion();
-    }
-};
+    }};
 setInterval(() => {
     if (time <= 0) return;
  time--;
- let min = Math.floor(time / 60);
+let min = Math.floor(time / 60);
     let sec = time % 60;
-document.getElementById("timer").textContent =
+  document.getElementById("timer").textContent =
         `${min}:${sec < 10 ? "0" : ""}${sec}`;
 if (time === 0) {
         endQuiz();
     }}, 1000);
 function endQuiz() {
-    alert("Time's up! Quiz submitted.");}
+    alert("Time's up! Quiz submitted.");
+}

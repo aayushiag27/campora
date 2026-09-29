@@ -5,35 +5,63 @@ const quiz = document.getElementById("quiz");
 const name = document.getElementById("name");
 const question = document.getElementById("question");
 const options = document.getElementById("options");
-let questions = [], current = 0;
+let questions = [];
+let current = 0;
+let time = 600;
 fetch("questions.json")
     .then(res => res.json())
     .then(data => questions = data);
 startBtn.onclick = () => {
-    if (!username.value.trim()) return alert("Please enter your name");
-    name.textContent = username.value;
+    if (!username.value.trim()) {
+        alert("Please enter your name");
+        return;
+    }
+name.textContent = username.value;
     login.style.display = "none";
     quiz.style.display = "block";
     showQuestion();
 };
 function showQuestion() {
     let q = questions[current];
+
     question.textContent = q.question;
-    options.innerHTML = q.options.map(option =>
+  document.getElementById("number").textContent =
+        `Question ${current + 1} of ${questions.length}`;
+  options.innerHTML = q.options.map(option =>
         `<button tabindex="0">${option}</button>`
     ).join("");
-    document.getElementById("number").textContent =
-        `Question ${current + 1} of ${questions.length}`;
+ document.querySelectorAll("#options button").forEach(button => {
+        button.onclick = () => selectAnswer(button);
+    });
 }
-let time = 600;
+function selectAnswer(button) {
+    let q = questions[current];
+document.querySelectorAll("#options button").forEach(btn => {
+        btn.disabled = true;
+ if (btn.textContent === q.answer) {
+            btn.style.background = "#22c55e";
+        }
+    });
+if (button.textContent !== q.answer) {
+        button.style.background = "#ef4444";
+    }
+}
+document.getElementById("next").onclick = () => {
+    if (current < questions.length - 1) {
+        current++;
+        showQuestion();
+    }
+};
 setInterval(() => {
     if (time <= 0) return;
  time--;
- let min = Math.floor(time / 60);
+let min = Math.floor(time / 60);
     let sec = time % 60;
- document.getElementById("timer").textContent =
+document.getElementById("timer").textContent =
         `${min}:${sec < 10 ? "0" : ""}${sec}`;
- if (time === 0) endQuiz();
+if (time === 0) {
+        endQuiz();
+    }
 }, 1000);
 function endQuiz() {
     alert("Time's up! Quiz submitted.");

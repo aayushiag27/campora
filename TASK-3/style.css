@@ -109,22 +109,6 @@ nav b {
     color: #aaa6bd;
 }
 
-#question {
-    margin-bottom: 25px;
-}
-
-#options {
-    display: grid;
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-#options button {
-    width: 100%;
-    background: #211d3b;
-    text-align: left;
-}
-
 .status-bar {
     display: flex;
     gap: 12px;
@@ -133,49 +117,67 @@ nav b {
 
 .status-bar button {
     padding: 8px 14px;
-    border: none;
-    border-radius: 8px;
     background: #211d3b;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 #attempted {
     color: #22c55e;
 }
+
 #unattempted {
     color: #ef4444;
 }
+
 #reviewed {
-    color: #a855f7;}
+    color: #a855f7;
+}
+#question {
+    margin-bottom: 25px;
+}
+#options {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+#options button {
+    width: 100%;
+    background: #211d3b;
+    text-align: left;
+}
 .result {
     display: none;
     min-height: 100vh;
     padding: 25px;
     align-items: center;
     justify-content: center;
-    background: rgba(13, 11, 31, 0.9);}
+    background: rgba(13, 11, 31, 0.9);
+}
 .result-card {
     width: 420px;
     padding: 40px;
     background: #17142d;
     border: 1px solid #403866;
     border-radius: 24px;
-    text-align: center;}
+    text-align: center;
+}
 .result-card h1 {
-    margin-bottom: 20px;}
+    margin-bottom: 20px;
+}
 #finalScore {
     color: #a78bfa;
     font-size: 40px;
-    margin-bottom: 10px;}
-#resultMessage 
+    margin-bottom: 10px;
+}
+#resultMessage {
     color: #aaa6bd;
-    margin-bottom: 25px;}
+    margin-bottom: 25px;
+}
 .summary {
     background: #211d3b;
     padding: 18px;
     border-radius: 12px;
-    margin-bottom: 25px;}
+    margin-bottom: 25px;
+}
 .summary p {
     margin: 10px 0;
 }

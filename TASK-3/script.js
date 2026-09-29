@@ -20,6 +20,7 @@ const reattempt = document.getElementById("reattempt");
 const attempted = document.getElementById("attempted");
 const unattempted = document.getElementById("unattempted");
 const reviewed = document.getElementById("reviewed");
+const endTest = document.getElementById("endTest");
 
 let questions = [];
 let current = 0;
@@ -126,6 +127,9 @@ next.onclick = () => {
     }
  current++;
     showQuestion();
+};
+endTest.onclick = () => {
+    endQuiz();
 };
 setInterval(() => {
     if (time <= 0 || submitted) return;

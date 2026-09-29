@@ -142,3 +142,45 @@ nav b {
     margin: 10px 0;}
 #reattempt {
     width: 100%;}
+    .status-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.status-bar span {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #211d3b;
+}
+
+#attempted {
+    color: #22c55e;
+}
+
+#unattempted {
+    color: #ef4444;
+}
+
+#reviewed {
+    color: #a855f7;
+}
+.status-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+.status-bar span {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #211d3b;
+}
+#attempted {
+    color: #22c55e;
+}
+#unattempted {
+    color: #ef4444;
+}
+#reviewed {
+    color: #a855f7;
+}

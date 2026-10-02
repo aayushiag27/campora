@@ -63,7 +63,7 @@ body {
 }
 
 .hero {
-    background-image: url("https://plus.unsplash.com/premium_photo-1687239968372-eb409d88b411?fm=jpg&q=60&w=3000&auto=format&fit=crop");
+    background-image: url("bg.jpg");
     background-size: cover;
     background-position: center;
     color: white;

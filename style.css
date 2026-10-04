@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url("bg.jpeg") center/cover fixed;
+    color: white;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(13, 11, 31, 0.7);
+    padding: 20px;
+}
+
+.login-card {
+    width: 420px;
+    padding: 40px;
+    background: #17142d;
+    border: 1px solid #403866;
+    border-radius: 24px;
+    text-align: center;
+}
+
+.logo {
+    display: inline-block;
+    background: #8b5cf6;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.login-card p {
+    color: #aaa6bd;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 14px;
+    border: 1px solid #383354;
+    border-radius: 10px;
+    background: #0f0d20;
+    color: white;
+    font-size: 16px;
+}
+
+button {
+    padding: 13px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #8b5cf6;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #7c3aed;
+}
+
+#startBtn {
+    width: 100%;
+}
+
+.quiz {
+    display: none;
+    min-height: 100vh;
+    padding: 25px;
+    background: rgba(13, 11, 31, 0.9);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 25px;
+    background: #17142d;
+    border-radius: 15px;
+}
+
+nav b {
+    color: #a78bfa;
+    letter-spacing: 2px;
+}
+
+#number {
+    margin: 35px 0 15px;
+    color: #aaa6bd;
+}
+
+.status-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.status-bar button {
+    padding: 8px 14px;
+    background: #211d3b;
+}
+
+#attempted {
+    color: #22c55e;
+}
+
+#unattempted {
+    color: #ef4444;
+}
+
+#reviewed {
+    color: #a855f7;
+}
+#question {
+    margin-bottom: 25px;
+}
+#options {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+#options button {
+    width: 100%;
+    background: #211d3b;
+    text-align: left;
+}
+.result {
+    display: none;
+    min-height: 100vh;
+    padding: 25px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(13, 11, 31, 0.9);
+}
+.result-card {
+    width: 420px;
+    padding: 40px;
+    background: #17142d;
+    border: 1px solid #403866;
+    border-radius: 24px;
+    text-align: center;
+}
+.result-card h1 {
+    margin-bottom: 20px;
+}
+#finalScore {
+    color: #a78bfa;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+#resultMessage {
+    color: #aaa6bd;
+    margin-bottom: 25px;
+}
+.summary {
+    background: #211d3b;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+.summary p {
+    margin: 10px 0;
+}
+#reattempt {
+    width: 100%;
+}
+body.light {
+    background: #f5f3ff;
+    color: #1f1b2d;
+}
+
+body.light .login-container,
+body.light .quiz,
+body.light .result {
+    background: rgba(245, 243, 255, 0.95);
+}
+
+body.light .login-card,
+body.light nav,
+body.light .result-card {
+    background: white;
+    border-color: #ddd6fe;
+}
+
+body.light input {
+    background: #f5f3ff;
+    color: #1f1b2d;
+    border-color: #c4b5fd;
+}
+
+body.light .status-bar button,
+body.light #options button,
+body.light .summary {
+    background: #ede9fe;
+    color: #1f1b2d;
+}
+
+body.light #number,
+body.light .login-card p,
+body.light #resultMessage {
+    color: #6b6680;
+}
+@media (max-width: 600px) {
+    .login-card,
+    .result-card {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .quiz {
+        padding: 15px;
+    }
+
+ nav {
+        padding: 15px;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+ .status-bar {
+        flex-wrap: wrap;
+    }
+   .status-bar button {
+        flex: 1;
+        min-width: 100px;
+    }
+ #question {
+        font-size: 22px; }
+   #review,
+    #next,
+    #endTest {
+        width: 100%;
+        margin-top: 8px;   }
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAMPORA | AKGEC Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-container" id="login">
+        <div class="login-card">
+            <div class="logo">CAMPORA</div>
+            <h1>AKGEC Knowledge Challenge</h1>
+            <p>How well do you know AKGEC?</p>
+
+            <label for="username">Enter your name</label>
+            <input id="username" placeholder="Your name" aria-label="Enter your name">
+
+            <button id="startBtn" tabindex="0">Start Quiz</button>
+        </div>
+    </div>
+
+    <div class="quiz" id="quiz">
+
+       <nav>
+    <b>CAMPORA</b>
+    <span id="name"></span>
+    <span id="timer">10:00</span>
+    <button id="themeToggle" tabindex="0">Light Mode</button>
+</nav>
+
+        <p id="number">Question 1 of 10</p>
+
+        <div class="status-bar">
+            <button id="attempted">Attempted: 0</button>
+            <button id="unattempted">Unattempted: 10</button>
+            <button id="reviewed">Review: 0</button>
+        </div>
+
+        <h2 id="question"></h2>
+
+        <div id="options"></div>
+
+       <button id="review" tabindex="0">Mark for Review</button>
+<button id="next" tabindex="0">Next</button>
+<button id="endTest" tabindex="0">End Test</button>
+
+    </div>
+
+    <div class="result" id="result">
+        <div class="result-card">
+            <h1>Quiz Completed!</h1>
+            <h2 id="finalScore"></h2>
+            <p id="resultMessage"></p>
+
+            <div class="summary">
+                <p>Correct: <span id="correctCount"></span></p>
+                <p>Incorrect: <span id="incorrectCount"></span></p>
+                <p>Unattempted: <span id="unattemptedCount"></span></p>
+            </div>
+
+            <button id="reattempt">Reattempt Quiz</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+[
+    {
+        "question": "What does AKGEC stand for?",
+        "options": [
+            "Ajay Kumar Garg Engineering College",
+            "Ajay Kumar Gupta Engineering College",
+            "Ajay Kumar Garg Educational Campus",
+            "Ajay Garg Engineering College"
+        ],
+        "answer": "Ajay Kumar Garg Engineering College"
+    },
+    {
+        "question": "In which city is AKGEC located?",
+        "options": [
+            "Lucknow",
+            "Ghaziabad",
+            "Noida",
+            "Meerut"
+        ],
+        "answer": "Ghaziabad"
+    },
+    {
+        "question": "In which year was AKGEC established?",
+        "options": [
+            "1995",
+            "1998",
+            "2001",
+            "2005"
+        ],
+        "answer": "1998"
+    },
+    {
+        "question": "Which university is AKGEC affiliated with?",
+        "options": [
+            "University of Delhi",
+            "Dr. A.P.J. Abdul Kalam Technical University",
+            "Banaras Hindu University",
+            "Aligarh Muslim University"
+        ],
+        "answer": "Dr. A.P.J. Abdul Kalam Technical University"
+    },
+    {
+        "question": "What is the college code of AKGEC?",
+        "options": [
+            "027",
+            "101",
+            "117",
+            "202"
+        ],
+        "answer": "027"
+    },
+    {
+        "question": "Which organization approves AKGEC's Engineering and Technology programs?",
+        "options": [
+            "UGC",
+            "AICTE",
+            "NAAC",
+            "NBA"
+        ],
+        "answer": "AICTE"
+    },
+    {
+        "question": "Which of the following is an engineering department at AKGEC?",
+        "options": [
+            "Computer Science and Engineering",
+            "Medicine",
+            "Law",
+            "Pharmacy"
+        ],
+        "answer": "Computer Science and Engineering"
+    },
+    {
+        "question": "Which of the following is one of the engineering departments at AKGEC?",
+        "options": [
+            "Mechanical Engineering",
+            "Medical Engineering",
+            "Legal Studies",
+            "Food Medicine"
+        ],
+        "answer": "Mechanical Engineering"
+    },
+    {
+        "question": "Which of the following is one of the engineering departments at AKGEC?",
+        "options": [
+            "Civil Engineering",
+            "Medical Engineering",
+            "Legal Studies",
+            "Fashion Design"
+        ],
+        "answer": "Civil Engineering"
+    },
+    {
+        "question": "Which student chapter is listed among the CSE Department's activities at AKGEC?",
+        "options": [
+            "ACM Student Chapter",
+            "NASA Student Chapter",
+            "UN Student Chapter",
+            "WHO Student Chapter"
+        ],
+        "answer": "ACM Student Chapter"
+    }
+]

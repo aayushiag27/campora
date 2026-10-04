@@ -3,34 +3,39 @@ const startBtn = document.getElementById("startBtn");
 const login = document.getElementById("login");
 const quiz = document.getElementById("quiz");
 const result = document.getElementById("result");
+
 const name = document.getElementById("name");
 const question = document.getElementById("question");
 const options = document.getElementById("options");
-const review = document.getElementById("review");
-const next = document.getElementById("next");
 const number = document.getElementById("number");
 const timer = document.getElementById("timer");
-const finalScore = document.getElementById("finalScore");
-const resultMessage = document.getElementById("resultMessage");
-const correctCount = document.getElementById("correctCount");
-const incorrectCount = document.getElementById("incorrectCount");
-const unattemptedCount = document.getElementById("unattemptedCount");
-const reattempt = document.getElementById("reattempt");
+
+const review = document.getElementById("review");
+const next = document.getElementById("next");
+const endTest = document.getElementById("endTest");
 
 const attempted = document.getElementById("attempted");
 const unattempted = document.getElementById("unattempted");
 const reviewed = document.getElementById("reviewed");
-const endTest = document.getElementById("endTest");
+
+const progressBar = document.getElementById("progressBar");
 const themeToggle = document.getElementById("themeToggle");
+
+const finalScore = document.getElementById("finalScore");
+const correctCount = document.getElementById("correctCount");
+const incorrectCount = document.getElementById("incorrectCount");
+const unattemptedCount = document.getElementById("unattemptedCount");
+const resultMessage = document.getElementById("resultMessage");
+const reattempt = document.getElementById("reattempt");
 
 let questions = [];
 let current = 0;
-let time = 600;
 let score = 0;
+let time = 600;
+
 let answered = [];
 let marked = [];
-let correct = [];
-let submitted = false;
+let selectedAnswers = [];
 
 fetch("questions.json")
     .then(res => res.json())
@@ -38,10 +43,12 @@ fetch("questions.json")
         questions = data;
         answered = new Array(questions.length).fill(false);
         marked = new Array(questions.length).fill(false);
-        correct = new Array(questions.length).fill(false);
+        selectedAnswers = new Array(questions.length).fill("");
+        showQuestion();
     });
 
 startBtn.onclick = () => {
+
     if (!username.value.trim()) {
         alert("Please enter your name");
         return;
@@ -55,18 +62,42 @@ startBtn.onclick = () => {
 };
 
 function showQuestion() {
+
     let q = questions[current];
-
-    let attemptedCount = answered.filter(value => value).length;
-    let unattemptedCount = questions.length - attemptedCount;
-    let reviewCount = marked.filter(value => value).length;
-
-    attempted.textContent = `Attempted: ${attemptedCount}`;
-    unattempted.textContent = `Unattempted: ${unattemptedCount}`;
-    reviewed.textContent = `Review: ${reviewCount}`;
 
     question.textContent = q.question;
     number.textContent = `Question ${current + 1} of ${questions.length}`;
+
+    let attemptedCount = answered.filter(value => value).length;
+    let reviewCount = marked.filter(value => value).length;
+
+    attempted.textContent = `Attempted: ${attemptedCount}`;
+    unattempted.textContent =
+        `Unattempted: ${questions.length - attemptedCount}`;
+    reviewed.textContent = `Review: ${reviewCount}`;
+
+    progressBar.innerHTML = questions.map((_, i) => {
+
+        let status = marked[i]
+            ? "reviewed"
+            : answered[i]
+            ? "attempted"
+            : "unattempted";
+
+        return `<button class="${status}" data-index="${i}"
+            aria-label="Go to question ${i + 1}"
+            tabindex="0">${i + 1}</button>`;
+
+    }).join("");
+
+    progressBar.querySelectorAll("button").forEach(button => {
+
+        button.onclick = () => {
+            current = Number(button.dataset.index);
+            showQuestion();
+        };
+
+    });
 
     options.innerHTML = q.options.map(option =>
         `<button tabindex="0">${option}</button>`
@@ -76,147 +107,153 @@ function showQuestion() {
         button.onclick = () => selectAnswer(button);
     });
 
-    if (marked[current]) {
-        review.textContent = "Unmark Review";
-        review.style.background = "#9333ea";
-    } else {
-        review.textContent = "Mark for Review";
-        review.style.background = "#8b5cf6";
+    if (answered[current]) {
+
+        document.querySelectorAll("#options button").forEach(button => {
+
+            button.disabled = true;
+
+            if (button.textContent === q.answer) {
+                button.style.background = "#22c55e";
+            }
+
+            if (
+                button.textContent === selectedAnswers[current] &&
+                button.textContent !== q.answer
+            ) {
+                button.style.background = "#ef4444";
+            }
+
+        });
     }
 
-    next.textContent = current === questions.length - 1 ? "Finish" : "Next";
+    review.textContent =
+        marked[current] ? "Unmark Review" : "Mark for Review";
+
+    next.textContent =
+        current === questions.length - 1 ? "Finish" : "Next";
 }
 
 function selectAnswer(button) {
+
     if (answered[current]) return;
- let q = questions[current];
- answered[current] = true;
-    correct[current] = button.textContent === q.answer;
-   document.querySelectorAll("#options button").forEach(btn => {
-        btn.disabled = true;
- if (btn.textContent === q.answer) {
-            btn.style.background = "#22c55e";
-        }
-    });
-if (correct[current]) {
+
+    let q = questions[current];
+
+    answered[current] = true;
+    selectedAnswers[current] = button.textContent;
+
+    if (button.textContent === q.answer) {
         score += 4;
+        button.style.background = "#22c55e";
     } else {
         score -= 1;
         button.style.background = "#ef4444";
     }
- let attemptedCount = answered.filter(value => value).length;
-    let unattemptedCount = questions.length - attemptedCount;
-attempted.textContent = `Attempted: ${attemptedCount}`;
-    unattempted.textContent = `Unattempted: ${unattemptedCount}`;
+
+    document.querySelectorAll("#options button").forEach(btn => {
+        btn.disabled = true;
+
+        if (btn.textContent === q.answer) {
+            btn.style.background = "#22c55e";
+        }
+    });
+
+    showQuestion();
 }
+
 review.onclick = () => {
+
     marked[current] = !marked[current];
- if (marked[current]) {
-        review.textContent = "Unmark Review";
-        review.style.background = "#9333ea";
-    } else {
-        review.textContent = "Mark for Review";
-        review.style.background = "#8b5cf6";
-    }
- let reviewCount = marked.filter(value => value).length;
-    reviewed.textContent = `Review: ${reviewCount}`;
-};
-next.onclick = () => {
-    if (current === questions.length - 1) {
-        endQuiz();
-        return;
-    }
- current++;
+
+    review.textContent =
+        marked[current] ? "Unmark Review" : "Mark for Review";
+
     showQuestion();
 };
+
+next.onclick = () => {
+
+    if (current === questions.length - 1) {
+        endQuiz();
+    } else {
+        current++;
+        showQuestion();
+    }
+};
+
 endTest.onclick = () => {
     endQuiz();
 };
-setInterval(() => {
-    if (time <= 0 || submitted) return;
- time--;
-  let min = Math.floor(time / 60);
-    let sec = time % 60;
- timer.textContent =
-        `${min}:${sec < 10 ? "0" : ""}${sec}`;
-if (time === 0) {
-        endQuiz();
-    }
-}, 1000);
+
 function endQuiz() {
-    if (submitted) return;
-     submitted = true;
- let correctAnswers = correct.filter(value => value).length;
-    let incorrectAnswers = answered.filter((value, i) => value && !correct[i]).length;
-    let unattemptedAnswers = answered.filter(value => !value).length;
- finalScore.textContent = `Score: ${score}`;
+
+    let correctAnswers = answered.filter(
+        (value, i) => value && selectedAnswers[i] === questions[i].answer
+    ).length;
+
+    let incorrectAnswers = answered.filter(
+        (value, i) => value && selectedAnswers[i] !== questions[i].answer
+    ).length;
+
+    let unattemptedAnswers =
+        questions.length - answered.filter(value => value).length;
+
+    finalScore.textContent = `Score: ${score}`;
+
     correctCount.textContent = correctAnswers;
     incorrectCount.textContent = incorrectAnswers;
     unattemptedCount.textContent = unattemptedAnswers;
-    resultMessage.textContent = `You answered ${correctAnswers} correctly out of ${questions.length}.`;
-  quiz.style.display = "none";
+
+    resultMessage.textContent =
+        `You answered ${correctAnswers} correctly out of ${questions.length}.`;
+
+    quiz.style.display = "none";
     result.style.display = "flex";
 }
-attempted.onclick = () => {
-    let index = answered.findIndex((value, i) => value && i > current);
 
-    if (index === -1) {
-        index = answered.findIndex(value => value);
+setInterval(() => {
+
+    if (time <= 0) return;
+
+    time--;
+
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    timer.textContent =
+        `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+
+    if (time === 0) {
+        endQuiz();
     }
 
-    if (index !== -1) {
-        current = index;
-        showQuestion();
-    }
-};
+}, 1000);
 
-unattempted.onclick = () => {
-    let index = answered.findIndex((value, i) => !value && i > current);
-
-    if (index === -1) {
-        index = answered.findIndex(value => !value);
-    }
-
-    if (index !== -1) {
-        current = index;
-        showQuestion();
-    }
-};
-
-reviewed.onclick = () => {
-    let index = marked.findIndex((value, i) => value && i > current);
-
-    if (index === -1) {
-        index = marked.findIndex(value => value);
-    }
-
-    if (index !== -1) {
-        current = index;
-        showQuestion();
-    }
-};
 reattempt.onclick = () => {
+
     current = 0;
-    time = 600;
     score = 0;
-    submitted = false;
- answered = new Array(questions.length).fill(false);
+    time = 600;
+
+    answered = new Array(questions.length).fill(false);
     marked = new Array(questions.length).fill(false);
-    correct = new Array(questions.length).fill(false);
-  timer.textContent = "10:00";
-    attempted.textContent = "Attempted: 0";
-    unattempted.textContent = `Unattempted: ${questions.length}`;
-    reviewed.textContent = "Review: 0";
-result.style.display = "none";
+    selectedAnswers = new Array(questions.length).fill("");
+
+    timer.textContent = "10:00";
+
+    result.style.display = "none";
     quiz.style.display = "block";
- showQuestion();
+
+    showQuestion();
 };
+
 themeToggle.onclick = () => {
+
     document.body.classList.toggle("light");
 
-    if (document.body.classList.contains("light")) {
-        themeToggle.textContent = "Dark Mode";
-    } else {
-        themeToggle.textContent = "Light Mode";
-    }
+    themeToggle.textContent =
+        document.body.classList.contains("light")
+        ? "Dark Mode"
+        : "Light Mode";
 };

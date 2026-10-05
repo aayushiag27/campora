@@ -116,38 +116,28 @@ function selectAnswer(btn) {
     if (answered[current]) return;
 
     let q = questions[current];
-
-    answered[current] = true;
+     if (!q) return;
+  answered[current] = true;
     selectedAnswers[current] = btn.textContent;
-
-    score += btn.textContent === q.answer ? 4 : -1;
-
+ score += btn.textContent === q.answer ? 4 : -1;
     btn.style.background =
         btn.textContent === q.answer ? "#22c55e" : "#ef4444";
-
-    options.querySelectorAll("button").forEach(b => {
+ options.querySelectorAll("button").forEach(b => {
         b.disabled = true;
-
-        if (b.textContent === q.answer)
-            b.style.background = "#22c55e";
-    });
-
-    showQuestion();
+   if (b.textContent === q.answer)
+            b.style.background = "#22c55e";  });
+ showQuestion();
 }
-
 review.onclick = () => {
     marked[current] = !marked[current];
     showQuestion();
 };
-
 next.onclick = () => {
     current < questions.length - 1
         ? (current++, showQuestion())
         : endQuiz();
 };
-
 endTest.onclick = endQuiz;
-
 function endQuiz() {
     let correct = answered.filter((v, i) =>
         v && selectedAnswers[i] === questions[i].answer
@@ -159,54 +149,40 @@ function endQuiz() {
 
     let skipped = questions.length -
         answered.filter(Boolean).length;
-
-    finalScore.textContent = `Score: ${score}`;
+ finalScore.textContent = `Score: ${score}`;
     correctCount.textContent = correct;
     incorrectCount.textContent = incorrect;
     unattemptedCount.textContent = skipped;
-
-    resultMessage.textContent =
+ resultMessage.textContent =
         correct >= 8 ? "Outstanding! AKGEC Pro!" :
         correct >= 5 ? "Good job! Keep learning!" :
         "Nice try! Give it another shot!";
-
-    quiz.style.display = "none";
+ quiz.style.display = "none";
     result.style.display = "flex";
 }
-
 setInterval(() => {
     if (time <= 0) return;
-
-    time--;
-
-    let min = Math.floor(time / 60);
+ time--;
+ let min = Math.floor(time / 60);
     let sec = time % 60;
-
-    timer.textContent = `${min}:${sec < 10 ? "0" : ""}${sec}`;
-
-    if (time === 0) endQuiz();
+ timer.textContent = `${min}:${sec < 10 ? "0" : ""}${sec}`;
+if (time === 0) endQuiz();
 }, 1000);
-
 reattempt.onclick = () => {
     current = 0;
     score = 0;
     time = 600;
-
-    answered.fill(false);
+ answered.fill(false);
     marked.fill(false);
     selectedAnswers.fill("");
-
-    timer.textContent = "10:00";
+ timer.textContent = "10:00";
     result.style.display = "none";
     quiz.style.display = "block";
-
-    showQuestion();
+showQuestion();
 };
-
 themeToggle.onclick = () => {
     document.body.classList.toggle("light");
-
-    themeToggle.textContent =
+  themeToggle.textContent =
         document.body.classList.contains("light")
         ? "Dark Mode" : "Light Mode";
 };

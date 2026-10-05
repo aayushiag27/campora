@@ -52,7 +52,7 @@ startBtn.onclick = () => {
         return;
     }
 
-    name.textContent = username.value;
+    name.textContent = username.value.trim();
     login.style.display = "none";
     quiz.style.display = "block";
     showQuestion();

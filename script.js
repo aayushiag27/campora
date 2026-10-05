@@ -1,3 +1,4 @@
+
 const username = document.getElementById("username");
 const startBtn = document.getElementById("startBtn");
 const login = document.getElementById("login");
@@ -48,35 +49,6 @@ function saveProgress() {
     }));
 }
 
-function restoreProgress() {
-    let saved = localStorage.getItem("camporaProgress");
-
-    if (!saved || !questions.length) return;
-
-    saved = JSON.parse(saved);
-
-    username.value = saved.username;
-    name.textContent = saved.username;
-
-    current = saved.current;
-    score = saved.score;
-    time = saved.time;
-    answered = saved.answered;
-    marked = saved.marked;
-    selectedAnswers = saved.selectedAnswers;
-
-    login.style.display = "none";
-    quiz.style.display = "block";
-
-    let min = Math.floor(time / 60);
-    let sec = time % 60;
-
-    timer.textContent =
-        `${min}:${sec < 10 ? "0" : ""}${sec}`;
-
-    showQuestion();
-}
-
 fetch("questions.json")
     .then(res => res.json())
     .then(data => {
@@ -85,8 +57,6 @@ fetch("questions.json")
         answered = new Array(data.length).fill(false);
         marked = new Array(data.length).fill(false);
         selectedAnswers = new Array(data.length).fill("");
-
-        restoreProgress();
     })
     .catch(() => {
         alert("Unable to load questions.");
@@ -104,6 +74,7 @@ startBtn.onclick = () => {
     }
 
     name.textContent = username.value.trim();
+
     login.style.display = "none";
     quiz.style.display = "block";
 
@@ -305,3 +276,5 @@ themeToggle.onclick = () => {
             ? "Dark Mode"
             : "Light Mode";
 };
+
+

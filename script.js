@@ -43,7 +43,6 @@ fetch("questions.json")
         answered = new Array(data.length).fill(false);
         marked = new Array(data.length).fill(false);
         selectedAnswers = new Array(data.length).fill("");
-        showQuestion();
     });
 
 startBtn.onclick = () => {
@@ -55,9 +54,7 @@ startBtn.onclick = () => {
     name.textContent = username.value.trim();
     login.style.display = "none";
     quiz.style.display = "block";
-    showQuestion();
 };
-
 function showQuestion() {
     let q = questions[current];
     let done = answered.filter(Boolean).length;

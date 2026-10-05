@@ -139,6 +139,7 @@ next.onclick = () => {
 };
 endTest.onclick = endQuiz;
 function endQuiz() {
+    if (!questions.length) return;
     let correct = answered.filter((v, i) =>
         v && selectedAnswers[i] === questions[i].answer
     ).length;

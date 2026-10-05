@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +8,7 @@
 body {
     font-family: Arial, sans-serif;
     color: white;
-    background: #0d0b1f;
+    background: black;
     overflow-x: hidden;
 }
 
@@ -33,15 +34,15 @@ body {
 .login-card {
     width: 420px;
     padding: 35px;
-    background: #17142d;
-    border: 1px solid #403866;
+    background: darkslateblue;
+    border: 1px solid slateblue;
     border-radius: 24px;
     text-align: center;
 }
 
 .logo {
     display: inline-block;
-    background: #8b5cf6;
+    background: mediumpurple;
     padding: 10px 18px;
     border-radius: 10px;
     font-weight: bold;
@@ -55,7 +56,7 @@ h1 {
 }
 
 .login-card p {
-    color: #aaa6bd;
+    color: silver;
     line-height: 1.5;
     margin-bottom: 25px;
 }
@@ -70,9 +71,9 @@ input {
     width: 100%;
     padding: 14px;
     margin-bottom: 14px;
-    border: 1px solid #383354;
+    border: 1px solid slateblue;
     border-radius: 10px;
-    background: #0f0d20;
+    background: black;
     color: white;
     font-size: 16px;
 }
@@ -81,14 +82,14 @@ button {
     padding: 13px 20px;
     border: none;
     border-radius: 10px;
-    background: #8b5cf6;
+    background: mediumpurple;
     color: white;
     font-weight: bold;
     cursor: pointer;
 }
 
 button:hover {
-    background: #7c3aed;
+    background: blueviolet;
     transform: translateY(-2px);
 }
 
@@ -107,12 +108,12 @@ nav {
     display: flex;
     justify-content: space-between;
     padding: 18px 25px;
-    background: #17142d;
+    background: darkslateblue;
     border-radius: 15px;
 }
 
 nav b {
-    color: #a78bfa;
+    color: plum;
     letter-spacing: 2px;
 }
 
@@ -130,15 +131,15 @@ nav b {
 
 .progress-bar button {
     padding: 8px 0;
-    background: #ef4444;
+    background: red;
 }
 
 .progress-bar button.attempted {
-    background: #22c55e;
+    background: limegreen;
 }
 
 .progress-bar button.reviewed {
-    background: #a855f7;
+    background: mediumorchid;
 }
 
 .progress-bar button.current {
@@ -153,19 +154,19 @@ nav b {
 
 .status-bar button {
     padding: 8px 14px;
-    background: #211d3b;
+    background: darkslateblue;
 }
 
 #attempted {
-    color: #22c55e;
+    color: limegreen;
 }
 
 #unattempted {
-    color: #ef4444;
+    color: red;
 }
 
 #reviewed {
-    color: #a855f7;
+    color: mediumorchid;
 }
 
 #question {
@@ -180,12 +181,12 @@ nav b {
 
 #options button {
     width: 100%;
-    background: #211d3b;
+    background: darkslateblue;
     text-align: left;
 }
 
 #options button:hover {
-    background: #302952;
+    background: slateblue;
 }
 
 .result {
@@ -200,25 +201,25 @@ nav b {
 .result-card {
     width: 420px;
     padding: 40px;
-    background: #17142d;
-    border: 1px solid #403866;
+    background: darkslateblue;
+    border: 1px solid slateblue;
     border-radius: 24px;
     text-align: center;
 }
 
 #finalScore {
-    color: #a78bfa;
+    color: plum;
     font-size: 40px;
     margin-bottom: 10px;
 }
 
 #resultMessage {
-    color: #aaa6bd;
+    color: silver;
     margin-bottom: 25px;
 }
 
 .summary {
-    background: #211d3b;
+    background: darkslateblue;
     padding: 18px;
     border-radius: 12px;
     margin-bottom: 25px;
@@ -233,8 +234,8 @@ nav b {
 }
 
 body.light {
-    background: #f5f3ff;
-    color: #1f1b2d;
+    background: lavender;
+    color: darkslategray;
 }
 
 body.light .login-container,
@@ -247,19 +248,19 @@ body.light .login-card,
 body.light nav,
 body.light .result-card {
     background: white;
-    border-color: #ddd6fe;
+    border-color: thistle;
 }
 
 body.light input {
-    background: #f5f3ff;
-    color: #1f1b2d;
+    background: lavender;
+    color: darkslategray;
 }
 
 body.light .status-bar button,
 body.light #options button,
 body.light .summary {
-    background: #ede9fe;
-    color: #1f1b2d;
+    background: lavender;
+    color: darkslategray;
 }
 
 @media (max-width: 600px) {

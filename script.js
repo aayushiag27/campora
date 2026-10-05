@@ -81,6 +81,7 @@ fetch("questions.json")
     .then(res => res.json())
     .then(data => {
         questions = data;
+
         answered = new Array(data.length).fill(false);
         marked = new Array(data.length).fill(false);
         selectedAnswers = new Array(data.length).fill("");
@@ -117,11 +118,14 @@ function showQuestion() {
     let done = answered.filter(Boolean).length;
 
     question.textContent = q.question;
-    number.textContent = `Question ${current + 1} of ${questions.length}`;
+    number.textContent =
+        `Question ${current + 1} of ${questions.length}`;
 
     attempted.textContent = `Attempted: ${done}`;
-    unattempted.textContent = `Unattempted: ${questions.length - done}`;
-    reviewed.textContent = `Review: ${marked.filter(Boolean).length}`;
+    unattempted.textContent =
+        `Unattempted: ${questions.length - done}`;
+    reviewed.textContent =
+        `Review: ${marked.filter(Boolean).length}`;
 
     progressBar.innerHTML = questions.map((_, i) => {
         let status = marked[i]
@@ -171,9 +175,10 @@ function showQuestion() {
         ? "Unmark Review"
         : "Mark for Review";
 
-    next.textContent = current === questions.length - 1
-        ? "Finish"
-        : "Next";
+    next.textContent =
+        current === questions.length - 1
+            ? "Finish"
+            : "Next";
 
     saveProgress();
 }
@@ -234,8 +239,8 @@ function endQuiz() {
         v && selectedAnswers[i] !== questions[i].answer
     ).length;
 
-    let skipped = questions.length -
-        answered.filter(Boolean).length;
+    let skipped =
+        questions.length - answered.filter(Boolean).length;
 
     finalScore.textContent = `Score: ${score}`;
     correctCount.textContent = correct;

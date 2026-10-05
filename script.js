@@ -57,8 +57,10 @@ startBtn.onclick = () => {
 };
 function showQuestion() {
     let q = questions[current];
-    let done = answered.filter(Boolean).length;
 
+    if (!q) return;
+
+    let done = answered.filter(Boolean).length;
     question.textContent = q.question;
     number.textContent = `Question ${current + 1} of ${questions.length}`;
 

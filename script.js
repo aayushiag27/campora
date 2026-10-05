@@ -32,7 +32,6 @@ let questions = [];
 let current = 0;
 let score = 0;
 let time = 600;
-
 let answered = [];
 let marked = [];
 let selectedAnswers = [];
@@ -41,14 +40,13 @@ fetch("questions.json")
     .then(res => res.json())
     .then(data => {
         questions = data;
-        answered = new Array(questions.length).fill(false);
-        marked = new Array(questions.length).fill(false);
-        selectedAnswers = new Array(questions.length).fill("");
+        answered = new Array(data.length).fill(false);
+        marked = new Array(data.length).fill(false);
+        selectedAnswers = new Array(data.length).fill("");
         showQuestion();
     });
 
 startBtn.onclick = () => {
-
     if (!username.value.trim()) {
         alert("Please enter your name");
         return;
@@ -57,191 +55,149 @@ startBtn.onclick = () => {
     name.textContent = username.value;
     login.style.display = "none";
     quiz.style.display = "block";
-
     showQuestion();
 };
 
 function showQuestion() {
-
     let q = questions[current];
+    let done = answered.filter(Boolean).length;
 
     question.textContent = q.question;
     number.textContent = `Question ${current + 1} of ${questions.length}`;
 
-    let attemptedCount = answered.filter(value => value).length;
-    let reviewCount = marked.filter(value => value).length;
-
-    attempted.textContent = `Attempted: ${attemptedCount}`;
-    unattempted.textContent =
-        `Unattempted: ${questions.length - attemptedCount}`;
-    reviewed.textContent = `Review: ${reviewCount}`;
+    attempted.textContent = `Attempted: ${done}`;
+    unattempted.textContent = `Unattempted: ${questions.length - done}`;
+    reviewed.textContent = `Review: ${marked.filter(Boolean).length}`;
 
     progressBar.innerHTML = questions.map((_, i) => {
+        let status = marked[i] ? "reviewed" :
+            answered[i] ? "attempted" : "unattempted";
 
-        let status = marked[i]
-            ? "reviewed"
-            : answered[i]
-            ? "attempted"
-            : "unattempted";
-
-        return `<button class="${status}" data-index="${i}"
-            aria-label="Go to question ${i + 1}"
-            tabindex="0">${i + 1}</button>`;
-
+        return `<button class="${status}" data-index="${i}">
+            ${i + 1}
+        </button>`;
     }).join("");
 
-    progressBar.querySelectorAll("button").forEach(button => {
-
-        button.onclick = () => {
-            current = Number(button.dataset.index);
+    progressBar.querySelectorAll("button").forEach(btn => {
+        btn.onclick = () => {
+            current = Number(btn.dataset.index);
             showQuestion();
         };
-
     });
 
-    options.innerHTML = q.options.map(option =>
-        `<button tabindex="0">${option}</button>`
+    options.innerHTML = q.options.map(opt =>
+        `<button>${opt}</button>`
     ).join("");
 
-    document.querySelectorAll("#options button").forEach(button => {
-        button.onclick = () => selectAnswer(button);
+    options.querySelectorAll("button").forEach(btn => {
+        btn.onclick = () => selectAnswer(btn);
     });
 
     if (answered[current]) {
+        options.querySelectorAll("button").forEach(btn => {
+            btn.disabled = true;
 
-        document.querySelectorAll("#options button").forEach(button => {
+            if (btn.textContent === q.answer)
+                btn.style.background = "#22c55e";
 
-            button.disabled = true;
-
-            if (button.textContent === q.answer) {
-                button.style.background = "#22c55e";
-            }
-
-            if (
-                button.textContent === selectedAnswers[current] &&
-                button.textContent !== q.answer
-            ) {
-                button.style.background = "#ef4444";
-            }
-
+            if (btn.textContent === selectedAnswers[current] &&
+                btn.textContent !== q.answer)
+                btn.style.background = "#ef4444";
         });
     }
 
-    review.textContent =
-        marked[current] ? "Unmark Review" : "Mark for Review";
+    review.textContent = marked[current]
+        ? "Unmark Review" : "Mark for Review";
 
-    next.textContent =
-        current === questions.length - 1 ? "Finish" : "Next";
+    next.textContent = current === questions.length - 1
+        ? "Finish" : "Next";
 }
 
-function selectAnswer(button) {
-
+function selectAnswer(btn) {
     if (answered[current]) return;
 
     let q = questions[current];
 
     answered[current] = true;
-    selectedAnswers[current] = button.textContent;
+    selectedAnswers[current] = btn.textContent;
 
-    if (button.textContent === q.answer) {
-        score += 4;
-        button.style.background = "#22c55e";
-    } else {
-        score -= 1;
-        button.style.background = "#ef4444";
-    }
+    score += btn.textContent === q.answer ? 4 : -1;
 
-    document.querySelectorAll("#options button").forEach(btn => {
-        btn.disabled = true;
+    btn.style.background =
+        btn.textContent === q.answer ? "#22c55e" : "#ef4444";
 
-        if (btn.textContent === q.answer) {
-            btn.style.background = "#22c55e";
-        }
+    options.querySelectorAll("button").forEach(b => {
+        b.disabled = true;
+
+        if (b.textContent === q.answer)
+            b.style.background = "#22c55e";
     });
 
     showQuestion();
 }
 
 review.onclick = () => {
-
     marked[current] = !marked[current];
-
-    review.textContent =
-        marked[current] ? "Unmark Review" : "Mark for Review";
-
     showQuestion();
 };
 
 next.onclick = () => {
-
-    if (current === questions.length - 1) {
-        endQuiz();
-    } else {
-        current++;
-        showQuestion();
-    }
+    current < questions.length - 1
+        ? (current++, showQuestion())
+        : endQuiz();
 };
 
-endTest.onclick = () => {
-    endQuiz();
-};
+endTest.onclick = endQuiz;
 
 function endQuiz() {
-
-    let correctAnswers = answered.filter(
-        (value, i) => value && selectedAnswers[i] === questions[i].answer
+    let correct = answered.filter((v, i) =>
+        v && selectedAnswers[i] === questions[i].answer
     ).length;
 
-    let incorrectAnswers = answered.filter(
-        (value, i) => value && selectedAnswers[i] !== questions[i].answer
+    let incorrect = answered.filter((v, i) =>
+        v && selectedAnswers[i] !== questions[i].answer
     ).length;
 
-    let unattemptedAnswers =
-        questions.length - answered.filter(value => value).length;
+    let skipped = questions.length -
+        answered.filter(Boolean).length;
 
     finalScore.textContent = `Score: ${score}`;
-
-    correctCount.textContent = correctAnswers;
-    incorrectCount.textContent = incorrectAnswers;
-    unattemptedCount.textContent = unattemptedAnswers;
+    correctCount.textContent = correct;
+    incorrectCount.textContent = incorrect;
+    unattemptedCount.textContent = skipped;
 
     resultMessage.textContent =
-        `You answered ${correctAnswers} correctly out of ${questions.length}.`;
+        correct >= 8 ? "Outstanding! AKGEC Pro!" :
+        correct >= 5 ? "Good job! Keep learning!" :
+        "Nice try! Give it another shot!";
 
     quiz.style.display = "none";
     result.style.display = "flex";
 }
 
 setInterval(() => {
-
     if (time <= 0) return;
 
     time--;
 
-    let minutes = Math.floor(time / 60);
-    let seconds = time % 60;
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
 
-    timer.textContent =
-        `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    timer.textContent = `${min}:${sec < 10 ? "0" : ""}${sec}`;
 
-    if (time === 0) {
-        endQuiz();
-    }
-
+    if (time === 0) endQuiz();
 }, 1000);
 
 reattempt.onclick = () => {
-
     current = 0;
     score = 0;
     time = 600;
 
-    answered = new Array(questions.length).fill(false);
-    marked = new Array(questions.length).fill(false);
-    selectedAnswers = new Array(questions.length).fill("");
+    answered.fill(false);
+    marked.fill(false);
+    selectedAnswers.fill("");
 
     timer.textContent = "10:00";
-
     result.style.display = "none";
     quiz.style.display = "block";
 
@@ -249,11 +205,9 @@ reattempt.onclick = () => {
 };
 
 themeToggle.onclick = () => {
-
     document.body.classList.toggle("light");
 
     themeToggle.textContent =
         document.body.classList.contains("light")
-        ? "Dark Mode"
-        : "Light Mode";
+        ? "Dark Mode" : "Light Mode";
 };

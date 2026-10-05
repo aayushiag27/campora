@@ -110,39 +110,39 @@ nav {
     background: #17142d;
     border-radius: 15px;
 }
-
 nav b {
     color: #a78bfa;
     letter-spacing: 2px;
 }
-
 #number {
     margin: 35px 0 15px;
     color: white;
 }
-
 .progress-bar {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: 8px;
     margin-bottom: 25px;
 }
-
 .progress-bar button {
     padding: 8px 0;
-    background: #ef4444;
+    background: #ffffff;
+    color: #000000;
 }
 
 .progress-bar button.attempted {
     background: #22c55e;
+    color: #000000;
 }
 
 .progress-bar button.reviewed {
     background: #a855f7;
+    color: #000000;
 }
 
 .progress-bar button.current {
     border: 2px solid white;
+    color: #000000;
 }
 
 .status-bar {

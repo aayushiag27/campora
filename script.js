@@ -43,6 +43,9 @@ fetch("questions.json")
         answered = new Array(data.length).fill(false);
         marked = new Array(data.length).fill(false);
         selectedAnswers = new Array(data.length).fill("");
+    })
+    .catch(() => {
+        alert("Unable to load questions.");
     });
 
 startBtn.onclick = () => {
@@ -51,16 +54,25 @@ startBtn.onclick = () => {
         return;
     }
 
+    if (!questions.length) {
+        alert("Questions are still loading. Please try again.");
+        return;
+    }
+
     name.textContent = username.value.trim();
     login.style.display = "none";
     quiz.style.display = "block";
+
+    showQuestion();
 };
+
 function showQuestion() {
     let q = questions[current];
 
     if (!q) return;
 
     let done = answered.filter(Boolean).length;
+
     question.textContent = q.question;
     number.textContent = `Question ${current + 1} of ${questions.length}`;
 
@@ -69,8 +81,11 @@ function showQuestion() {
     reviewed.textContent = `Review: ${marked.filter(Boolean).length}`;
 
     progressBar.innerHTML = questions.map((_, i) => {
-        let status = marked[i] ? "reviewed" :
-            answered[i] ? "attempted" : "unattempted";
+        let status = marked[i]
+            ? "reviewed"
+            : answered[i]
+                ? "attempted"
+                : "unattempted";
 
         return `<button class="${status}" data-index="${i}">
             ${i + 1}
@@ -96,50 +111,75 @@ function showQuestion() {
         options.querySelectorAll("button").forEach(btn => {
             btn.disabled = true;
 
-            if (btn.textContent === q.answer)
+            if (btn.textContent === q.answer) {
                 btn.style.background = "#22c55e";
+            }
 
-            if (btn.textContent === selectedAnswers[current] &&
-                btn.textContent !== q.answer)
+            if (
+                btn.textContent === selectedAnswers[current] &&
+                btn.textContent !== q.answer
+            ) {
                 btn.style.background = "#ef4444";
+            }
         });
     }
 
     review.textContent = marked[current]
-        ? "Unmark Review" : "Mark for Review";
+        ? "Unmark Review"
+        : "Mark for Review";
 
     next.textContent = current === questions.length - 1
-        ? "Finish" : "Next";
+        ? "Finish"
+        : "Next";
 }
 
 function selectAnswer(btn) {
     if (answered[current]) return;
 
     let q = questions[current];
-     if (!q) return;
-  answered[current] = true;
+
+    if (!q) return;
+
+    answered[current] = true;
     selectedAnswers[current] = btn.textContent;
- score += btn.textContent === q.answer ? 4 : -1;
+
+    score += btn.textContent === q.answer ? 4 : -1;
+
     btn.style.background =
-        btn.textContent === q.answer ? "#22c55e" : "#ef4444";
- options.querySelectorAll("button").forEach(b => {
+        btn.textContent === q.answer
+            ? "#22c55e"
+            : "#ef4444";
+
+    options.querySelectorAll("button").forEach(b => {
         b.disabled = true;
-   if (b.textContent === q.answer)
-            b.style.background = "#22c55e";  });
- showQuestion();
+
+        if (b.textContent === q.answer) {
+            b.style.background = "#22c55e";
+        }
+    });
+
+    showQuestion();
 }
+
 review.onclick = () => {
     marked[current] = !marked[current];
     showQuestion();
 };
+
 next.onclick = () => {
-    current < questions.length - 1
-        ? (current++, showQuestion())
-        : endQuiz();
+    if (current < questions.length - 1) {
+        current++;
+        showQuestion();
+    } else {
+        endQuiz();
+    }
 };
+
 endTest.onclick = endQuiz;
+
 function endQuiz() {
     if (!questions.length) return;
+
     let correct = answered.filter((v, i) =>
         v && selectedAnswers[i] === questions[i].answer
     ).length;
@@ -150,40 +190,61 @@ function endQuiz() {
 
     let skipped = questions.length -
         answered.filter(Boolean).length;
- finalScore.textContent = `Score: ${score}`;
+
+    finalScore.textContent = `Score: ${score}`;
     correctCount.textContent = correct;
     incorrectCount.textContent = incorrect;
     unattemptedCount.textContent = skipped;
- resultMessage.textContent =
-        correct >= 8 ? "Outstanding! AKGEC Pro!" :
-        correct >= 5 ? "Good job! Keep learning!" :
-        "Nice try! Give it another shot!";
- quiz.style.display = "none";
+
+    resultMessage.textContent =
+        correct >= 8
+            ? "Outstanding! AKGEC Pro!"
+            : correct >= 5
+                ? "Good job! Keep learning!"
+                : "Nice try! Give it another shot!";
+
+    quiz.style.display = "none";
     result.style.display = "flex";
 }
+
 setInterval(() => {
     if (time <= 0) return;
- time--;
- let min = Math.floor(time / 60);
+
+    time--;
+
+    let min = Math.floor(time / 60);
     let sec = time % 60;
- timer.textContent = `${min}:${sec < 10 ? "0" : ""}${sec}`;
-if (time === 0) endQuiz();
+
+    timer.textContent =
+        `${min}:${sec < 10 ? "0" : ""}${sec}`;
+
+    if (time === 0) {
+        endQuiz();
+    }
 }, 1000);
+
 reattempt.onclick = () => {
     current = 0;
     score = 0;
     time = 600;
- answered.fill(false);
+
+    answered.fill(false);
     marked.fill(false);
     selectedAnswers.fill("");
- timer.textContent = "10:00";
+
+    timer.textContent = "10:00";
+
     result.style.display = "none";
     quiz.style.display = "block";
-showQuestion();
+
+    showQuestion();
 };
+
 themeToggle.onclick = () => {
     document.body.classList.toggle("light");
-  themeToggle.textContent =
+
+    themeToggle.textContent =
         document.body.classList.contains("light")
-        ? "Dark Mode" : "Light Mode";
+            ? "Dark Mode"
+            : "Light Mode";
 };

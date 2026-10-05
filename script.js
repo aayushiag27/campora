@@ -36,6 +36,47 @@ let answered = [];
 let marked = [];
 let selectedAnswers = [];
 
+function saveProgress() {
+    localStorage.setItem("camporaProgress", JSON.stringify({
+        username: username.value,
+        current,
+        score,
+        time,
+        answered,
+        marked,
+        selectedAnswers
+    }));
+}
+
+function restoreProgress() {
+    let saved = localStorage.getItem("camporaProgress");
+
+    if (!saved || !questions.length) return;
+
+    saved = JSON.parse(saved);
+
+    username.value = saved.username;
+    name.textContent = saved.username;
+
+    current = saved.current;
+    score = saved.score;
+    time = saved.time;
+    answered = saved.answered;
+    marked = saved.marked;
+    selectedAnswers = saved.selectedAnswers;
+
+    login.style.display = "none";
+    quiz.style.display = "block";
+
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
+
+    timer.textContent =
+        `${min}:${sec < 10 ? "0" : ""}${sec}`;
+
+    showQuestion();
+}
+
 fetch("questions.json")
     .then(res => res.json())
     .then(data => {
@@ -43,6 +84,8 @@ fetch("questions.json")
         answered = new Array(data.length).fill(false);
         marked = new Array(data.length).fill(false);
         selectedAnswers = new Array(data.length).fill("");
+
+        restoreProgress();
     })
     .catch(() => {
         alert("Unable to load questions.");
@@ -131,6 +174,8 @@ function showQuestion() {
     next.textContent = current === questions.length - 1
         ? "Finish"
         : "Next";
+
+    saveProgress();
 }
 
 function selectAnswer(btn) {
@@ -158,6 +203,7 @@ function selectAnswer(btn) {
         }
     });
 
+    saveProgress();
     showQuestion();
 }
 
@@ -205,6 +251,8 @@ function endQuiz() {
 
     quiz.style.display = "none";
     result.style.display = "flex";
+
+    localStorage.removeItem("camporaProgress");
 }
 
 setInterval(() => {
@@ -218,12 +266,16 @@ setInterval(() => {
     timer.textContent =
         `${min}:${sec < 10 ? "0" : ""}${sec}`;
 
+    saveProgress();
+
     if (time === 0) {
         endQuiz();
     }
 }, 1000);
 
 reattempt.onclick = () => {
+    localStorage.removeItem("camporaProgress");
+
     current = 0;
     score = 0;
     time = 600;

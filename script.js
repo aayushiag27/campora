@@ -1,4 +1,3 @@
-
 const username = document.getElementById("username");
 const startBtn = document.getElementById("startBtn");
 const login = document.getElementById("login");
@@ -89,12 +88,15 @@ function showQuestion() {
     let done = answered.filter(Boolean).length;
 
     question.textContent = q.question;
+
     number.textContent =
         `Question ${current + 1} of ${questions.length}`;
 
     attempted.textContent = `Attempted: ${done}`;
+
     unattempted.textContent =
         `Unattempted: ${questions.length - done}`;
+
     reviewed.textContent =
         `Review: ${marked.filter(Boolean).length}`;
 
@@ -164,12 +166,13 @@ function selectAnswer(btn) {
     answered[current] = true;
     selectedAnswers[current] = btn.textContent;
 
-    score += btn.textContent === q.answer ? 4 : -1;
-
-    btn.style.background =
-        btn.textContent === q.answer
-            ? "#22c55e"
-            : "#ef4444";
+    if (btn.textContent === q.answer) {
+        score += 4;
+        btn.style.background = "#22c55e";
+    } else {
+        score -= 1;
+        btn.style.background = "#ef4444";
+    }
 
     options.querySelectorAll("button").forEach(b => {
         b.disabled = true;
@@ -214,6 +217,7 @@ function endQuiz() {
         questions.length - answered.filter(Boolean).length;
 
     finalScore.textContent = `Score: ${score}`;
+
     correctCount.textContent = correct;
     incorrectCount.textContent = incorrect;
     unattemptedCount.textContent = skipped;
@@ -276,5 +280,3 @@ themeToggle.onclick = () => {
             ? "Dark Mode"
             : "Light Mode";
 };
-
-

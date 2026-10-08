@@ -13,8 +13,6 @@ body {
 
 .bg-video {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -36,12 +34,13 @@ body {
     padding: 20px;
 }
 
-.login-card {
+.login-card,
+.result-card {
     width: 420px;
     padding: 35px;
     background: #17142d;
     border: 1px solid #403866;
-    border-radius: 24px;
+    border-radius: 20px;
     text-align: center;
 }
 
@@ -51,19 +50,16 @@ body {
     padding: 10px 18px;
     border-radius: 10px;
     font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 h1 {
-    font-size: 30px;
     margin-bottom: 12px;
 }
 
 .login-card p {
     color: #aaa6bd;
-    line-height: 1.5;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 label {
@@ -74,7 +70,7 @@ label {
 
 input {
     width: 100%;
-    padding: 14px;
+    padding: 13px;
     margin-bottom: 14px;
     border: 1px solid #383354;
     border-radius: 10px;
@@ -84,7 +80,7 @@ input {
 }
 
 button {
-    padding: 13px 20px;
+    padding: 12px 18px;
     border: none;
     border-radius: 10px;
     background: #8b5cf6;
@@ -95,10 +91,10 @@ button {
 
 button:hover {
     background: #7c3aed;
-    transform: translateY(-2px);
 }
 
-#startBtn {
+#startBtn,
+#reattempt {
     width: 100%;
 }
 
@@ -119,24 +115,18 @@ nav {
 
 nav b {
     color: #a78bfa;
-    letter-spacing: 2px;
 }
 
 #timer {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: bold;
     background: #211d3b;
-    color: white;
-    padding: 10px 20px;
-    border: 1px solid lavender;
-    border-radius: 12px;
-    min-width: 100px;
-    text-align: center;
+    padding: 10px 18px;
+    border-radius: 10px;
 }
 
 #number {
-    margin: 35px 0 15px;
-    color: white;
+    margin: 30px 0 15px;
 }
 
 .progress-bar {
@@ -154,27 +144,24 @@ nav b {
 
 .progress-bar button.attempted {
     background: #22c55e;
-    color: black;
 }
 
 .progress-bar button.reviewed {
     background: #a855f7;
-    color: black;
 }
 
-.progress-bar button.current {
+.progress-bar button.active {
     border: 2px solid white;
-    color: black;
+    transform: scale(1.05);
 }
 
 .status-bar {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 25px;
 }
 
 .status-bar button {
-    padding: 8px 14px;
     background: #211d3b;
 }
 
@@ -191,108 +178,98 @@ nav b {
 }
 
 #question {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
+
 #options {
     display: grid;
-    gap: 12px;
-    margin-bottom: 25px;
+    gap: 10px;
+    margin-bottom: 20px;
 }
+
 #options button {
     width: 100%;
     background: #211d3b;
     text-align: left;
 }
+
 #options button:hover {
     background: #302952;
 }
+
 .result {
     display: none;
     min-height: 100vh;
-    padding: 25px;
     align-items: center;
     justify-content: center;
+    padding: 25px;
     background: rgba(13, 11, 31, 0.65);
 }
-.result-card {
-    width: 420px;
-    padding: 40px;
-    background: #17142d;
-    border: 1px solid #403866;
-    border-radius: 24px;
-    text-align: center;
-}
+
 #finalScore {
     color: #a78bfa;
-    font-size: 40px;
+    font-size: 38px;
     margin-bottom: 10px;
 }
+
 #resultMessage {
     color: #aaa6bd;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
+
 .summary {
     background: #211d3b;
     padding: 18px;
     border-radius: 12px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
+
 .summary p {
-    margin: 10px 0;
+    margin: 8px 0;
 }
-#reattempt {
-    width: 100%;
-}
+
 body.light {
     background: #f5f3ff;
     color: #1f1b2d;
 }
-body.light .login-container,
-body.light .quiz,
-body.light .result {
-    background: rgba(245, 243, 255, 0.7);
-}
+
 body.light .login-card,
 body.light nav,
 body.light .result-card {
     background: white;
-    border-color: #ddd6fe;
 }
+
 body.light input {
     background: #f5f3ff;
     color: #1f1b2d;
 }
+
 body.light .status-bar button,
 body.light #options button,
 body.light .summary {
     background: #ede9fe;
-    color: #1f1b2d;
 }
 
 @media (max-width: 600px) {
- .login-card,
+    .login-card,
     .result-card {
         width: 100%;
         padding: 25px;
     }
- .quiz {
+.quiz {
         padding: 15px;
     }
-  nav {
-        padding: 15px;
+ nav {
         gap: 10px;
         flex-wrap: wrap;
     }
-  .progress-bar {
+ .progress-bar {
         grid-template-columns: repeat(5, 1fr);
     }
-  .status-bar {
+ .status-bar {
         flex-wrap: wrap;
     }
- .status-bar button {
-        flex: 1;
-    }
-  #question {
+ #question {
         font-size: 22px;
     }
  #review,

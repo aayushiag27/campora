@@ -3,14 +3,12 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: Arial, sans-serif;
     color: white;
     background: #0d0b1f;
     overflow-x: hidden;
 }
-
 .bg-video {
     position: fixed;
     width: 100%;
@@ -18,14 +16,12 @@ body {
     object-fit: cover;
     z-index: -2;
 }
-
 .overlay {
     position: fixed;
     inset: 0;
     background: rgba(13, 11, 31, 0.6);
     z-index: -1;
 }
-
 .login-container {
     min-height: 100vh;
     display: flex;
@@ -33,7 +29,6 @@ body {
     align-items: center;
     padding: 20px;
 }
-
 .login-card,
 .result-card {
     width: 420px;
@@ -43,7 +38,6 @@ body {
     border-radius: 20px;
     text-align: center;
 }
-
 .logo {
     display: inline-block;
     background: #8b5cf6;
@@ -52,22 +46,18 @@ body {
     font-weight: bold;
     margin-bottom: 20px;
 }
-
 h1 {
     margin-bottom: 12px;
 }
-
 .login-card p {
     color: #aaa6bd;
     margin-bottom: 20px;
 }
-
 label {
     display: block;
     text-align: left;
     margin-bottom: 7px;
 }
-
 input {
     width: 100%;
     padding: 13px;
@@ -78,7 +68,6 @@ input {
     color: white;
     font-size: 16px;
 }
-
 button {
     padding: 12px 18px;
     border: none;
@@ -88,7 +77,6 @@ button {
     font-weight: bold;
     cursor: pointer;
 }
-
 button:hover {
     background: #7c3aed;
 }
@@ -99,19 +87,16 @@ button:disabled {
 #options button:disabled {
     cursor: not-allowed;
 }
-
 #startBtn,
 #reattempt {
     width: 100%;
 }
-
 .quiz {
     display: none;
     min-height: 100vh;
     padding: 25px;
     background: rgba(13, 11, 31, 0.65);
 }
-
 nav {
     display: flex;
     justify-content: space-between;
@@ -119,11 +104,9 @@ nav {
     background: #17142d;
     border-radius: 15px;
 }
-
 nav b {
     color: #a78bfa;
 }
-
 #timer {
     font-size: 24px;
     font-weight: bold;
@@ -131,18 +114,15 @@ nav b {
     padding: 10px 18px;
     border-radius: 10px;
 }
-
 #number {
     margin: 30px 0 15px;
 }
-
 .progress-bar {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: 8px;
     margin-bottom: 25px;
 }
-
 .progress-bar button {
     padding: 8px 0;
     background: white;
@@ -221,19 +201,51 @@ body.light {
     background: #f5f3ff;
     color: #1f1b2d;
 }
+body.light .overlay {
+    background: rgba(255, 255, 255, 0.75);
+}
+body.light .quiz {
+    background: rgba(245, 243, 255, 0.8);
+}
+body.light .result {
+    background: rgba(245, 243, 255, 0.8);
+}
 body.light .login-card,
 body.light nav,
 body.light .result-card {
     background: white;
+    border-color: #ddd6fe;
+}
+body.light .login-card p,
+body.light #resultMessage {
+    color: #6b6480;
 }
 body.light input {
     background: #f5f3ff;
     color: #1f1b2d;
+    border-color: #c4b5fd;
 }
-body.light .status-bar button,
-body.light #options button,
+body.light #timer {
+    background: #ede9fe;
+    color: #1f1b2d;
+}
+body.light #number,
+body.light #question {
+    color: #1f1b2d;
+}
+body.light .status-bar button {
+    background: #ede9fe;
+}
+body.light #options button {
+    background: white;
+    color: #1f1b2d;
+}
+body.light #options button:hover {
+    background: #ede9fe;
+}
 body.light .summary {
     background: #ede9fe;
+    color: #1f1b2d;
 }
 @media (max-width: 600px) {
     .login-card,
@@ -241,31 +253,31 @@ body.light .summary {
         width: 100%;
         padding: 25px;
     }
- .quiz {
+    .quiz {
         padding: 15px;
     }
- nav {
+    nav {
         flex-direction: column;
         align-items: center;
         gap: 12px;
         text-align: center;
     }
- #timer {
+    #timer {
         font-size: 20px;
     }
- .progress-bar {
+    .progress-bar {
         grid-template-columns: repeat(5, 1fr);
     }
-.status-bar {
+    .status-bar {
         flex-direction: column;
     }
-     .status-bar button {
+.status-bar button {
         width: 100%;
     }
- #question {
+        #question {
         font-size: 22px;
     }
-  #review,
+#review,
     #next,
     #endTest {
         width: 100%;

@@ -141,62 +141,49 @@ nav b {
     background: white;
     color: black;
 }
-
 .progress-bar button.attempted {
     background: #22c55e;
 }
-
 .progress-bar button.reviewed {
     background: #a855f7;
 }
-
 .progress-bar button.active {
     border: 2px solid white;
     transform: scale(1.05);
 }
-
 .status-bar {
     display: flex;
     gap: 10px;
     margin-bottom: 25px;
 }
-
 .status-bar button {
     background: #211d3b;
 }
-
 #attempted {
     color: #22c55e;
 }
-
 #unattempted {
     color: #ef4444;
 }
-
 #reviewed {
     color: #a855f7;
 }
-
 #question {
     margin-bottom: 20px;
 }
-
 #options {
     display: grid;
     gap: 10px;
     margin-bottom: 20px;
 }
-
 #options button {
     width: 100%;
     background: #211d3b;
     text-align: left;
 }
-
 #options button:hover {
     background: #302952;
 }
-
 .result {
     display: none;
     min-height: 100vh;
@@ -205,74 +192,73 @@ nav b {
     padding: 25px;
     background: rgba(13, 11, 31, 0.65);
 }
-
 #finalScore {
     color: #a78bfa;
     font-size: 38px;
     margin-bottom: 10px;
 }
-
 #resultMessage {
     color: #aaa6bd;
     margin-bottom: 20px;
 }
-
 .summary {
     background: #211d3b;
     padding: 18px;
     border-radius: 12px;
     margin-bottom: 20px;
 }
-
 .summary p {
     margin: 8px 0;
 }
-
 body.light {
     background: #f5f3ff;
     color: #1f1b2d;
 }
-
 body.light .login-card,
 body.light nav,
 body.light .result-card {
     background: white;
 }
-
 body.light input {
     background: #f5f3ff;
     color: #1f1b2d;
 }
-
 body.light .status-bar button,
 body.light #options button,
 body.light .summary {
     background: #ede9fe;
 }
-
 @media (max-width: 600px) {
     .login-card,
     .result-card {
         width: 100%;
         padding: 25px;
     }
-.quiz {
+ .quiz {
         padding: 15px;
     }
  nav {
-        gap: 10px;
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-align: center;
+    }
+ #timer {
+        font-size: 20px;
     }
  .progress-bar {
         grid-template-columns: repeat(5, 1fr);
     }
- .status-bar {
-        flex-wrap: wrap;
+.status-bar {
+        flex-direction: column;
+    }
+     .status-bar button {
+        width: 100%;
     }
  #question {
         font-size: 22px;
     }
- #review,
+  #review,
     #next,
     #endTest {
         width: 100%;

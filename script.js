@@ -38,6 +38,7 @@ fetch("questions.json")
             marked[i] = false;
             selected[i] = "";
         }
+
     })
     .catch(() => {
         alert("Unable to load questions.");
@@ -50,7 +51,6 @@ startBtn.onclick = function () {
     name.textContent = username.value;
     login.style.display = "none";
     quiz.style.display = "block";
-
     showQuestion();
 };
 function showQuestion() {
@@ -65,56 +65,55 @@ function showQuestion() {
         if (answered[i]) {
             attemptedCount++;
         }
-
         if (marked[i]) {
             reviewCount++;
         }
     }
-
     attempted.textContent =
         "Attempted: " + attemptedCount;
-
     unattempted.textContent =
         "Unattempted: " +
         (questions.length - attemptedCount);
-
     reviewed.textContent =
         "Review: " + reviewCount;
     progressBar.innerHTML = "";
     for (let i = 0; i < questions.length; i++) {
-
         let button = document.createElement("button");
-
         button.textContent = i + 1;
-
         if (answered[i]) {
             button.className = "attempted";
         }
-
         if (marked[i]) {
             button.className = "reviewed";
         }
-
         if (i === current) {
             button.classList.add("active");
         }
-
         button.onclick = function () {
             current = i;
             showQuestion();
         };
-
         progressBar.appendChild(button);
     }
     options.innerHTML = "";
-
     for (let i = 0; i < q.options.length; i++) {
         let button = document.createElement("button");
         button.textContent = q.options[i];
         button.onclick = function () {
             selectAnswer(button);
         };
-
+        if (answered[current]) {
+            button.disabled = true;
+            if (button.textContent === q.answer) {
+                button.style.background = "#22c55e";
+            }
+            if (
+                button.textContent === selected[current] &&
+                selected[current] !== q.answer
+            ) {
+                button.style.background = "#ef4444";
+            }
+        }
         options.appendChild(button);
     }
     if (marked[current]) {
@@ -129,47 +128,28 @@ function showQuestion() {
     }
 }
 function selectAnswer(button) {
-
     if (answered[current]) {
         return;
     }
     let q = questions[current];
-
     answered[current] = true;
     selected[current] = button.textContent;
     if (button.textContent === q.answer) {
         score = score + 4;
-        button.style.background = "#22c55e";
     } else {
-
         score = score - 1;
-        button.style.background = "#ef4444";
-    }
-    let buttons = options.querySelectorAll("button");
-
-    for (let i = 0; i < buttons.length; i++) {
-
-        buttons[i].disabled = true;
-
-        if (buttons[i].textContent === q.answer) {
-            buttons[i].style.background = "#22c55e";
-        }
     }
     showQuestion();
 }
 review.onclick = function () {
-
     marked[current] = !marked[current];
-
     showQuestion();
 };
 next.onclick = function () {
     if (current < questions.length - 1) {
         current++;
         showQuestion();
-
     } else {
-
         endQuiz();
     }
 };
@@ -179,47 +159,34 @@ function endQuiz() {
     let incorrect = 0;
     let skipped = 0;
     for (let i = 0; i < questions.length; i++) {
-
         if (!answered[i]) {
-
             skipped++;
-
         } else if (selected[i] === questions[i].answer) {
-
             correct++;
-
         } else {
-
             incorrect++;
         }
     }
     finalScore.textContent =
         "Score: " + score;
-
     correctCount.textContent =
         correct;
-
     incorrectCount.textContent =
         incorrect;
-
     unattemptedCount.textContent =
         skipped;
     if (correct >= 8) {
         resultMessage.textContent =
             "Outstanding! AKGEC Pro!";
-
-    } else if (correct >= 5) {
-
+    }
+    else if (correct >= 5) {
         resultMessage.textContent =
             "Good job! Keep learning!";
 
     } else {
-
         resultMessage.textContent =
             "Nice try! Give it another shot!";
     }
-
-
     quiz.style.display = "none";
     result.style.display = "flex";
 }
@@ -254,10 +221,10 @@ reattempt.onclick = function () {
     showQuestion();
 };
 themeToggle.onclick = function () {
+
     document.body.classList.toggle("light");
     if (document.body.classList.contains("light")) {
         themeToggle.textContent = "Dark Mode";
-
     } else {
         themeToggle.textContent = "Light Mode";
     }

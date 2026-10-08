@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <video class="bg-video" autoplay muted loop playsinline>
         <source src="bg.mp4" type="video/mp4">
     </video>
@@ -17,25 +16,33 @@
     <div class="overlay"></div>
 
     <div class="login-container" id="login">
+
         <div class="login-card">
+
             <div class="logo">CAMPORA</div>
 
             <h1>Welcome to CAMPORA</h1>
-            <p>Test your AKGEC knowledge and challenge yourself!</p>
+
+            <p>
+                Test your AKGEC knowledge and challenge yourself!
+            </p>
 
             <label for="username">Enter your name</label>
-            <input
-                id="username"
-                type="text"
-                placeholder="Enter your name">
 
-            <button id="startBtn">Start Challenge</button>
+            <input id="username" type="text" placeholder="Enter your name">
+
+            <button id="startBtn">
+                Start Challenge
+            </button>
+
         </div>
+
     </div>
 
     <div class="quiz" id="quiz">
 
         <nav>
+
             <b>CAMPORA</b>
 
             <span id="name"></span>
@@ -47,54 +54,71 @@
             <button id="themeToggle">
                 Light Mode
             </button>
+
         </nav>
-
-        <p id="number">Question 1 of 10</p>
-
-        <div
-            class="progress-bar"
-            id="progressBar">
+        <p id="number">
+            Question 1 of 10
+        </p>
+        <div class="progress-bar" id="progressBar">
         </div>
-
         <div class="status-bar">
-            <button id="attempted">Attempted: 0</button>
-            <button id="unattempted">Unattempted: 10</button>
-            <button id="reviewed">For Review: 0</button>
-        </div>
 
+            <button id="attempted">
+                Attempted: 0
+            </button>
+
+            <button id="unattempted">
+                Unattempted: 10
+            </button>
+
+            <button id="reviewed">
+                For Review: 0
+            </button>
+
+        </div>
         <h2 id="question">
             Question
         </h2>
-
         <div id="options"></div>
-
-        <button id="review">Mark for Review</button>
-        <button id="next">Next Question</button>
-        <button id="endTest">Finish Challenge</button>
+        <button id="review">
+            Mark for Review
+        </button>
+        <button id="next">
+            Next Question
+        </button>
+        <button id="endTest">
+            Finish Challenge
+        </button>
 
     </div>
-
     <div class="result" id="result">
         <div class="result-card">
-
             <h1>Challenge Completed!</h1>
-
             <h2 id="finalScore"></h2>
             <p id="resultMessage"></p>
-
             <div class="summary">
-                <p>Correct: <span id="correctCount"></span></p>
-                <p>Incorrect: <span id="incorrectCount"></span></p>
-                <p>Unattempted: <span id="unattemptedCount"></span></p>
-            </div>
+                <p>
+                    Correct:
+                    <span id="correctCount"></span>
+                </p>
 
+                <p>
+                    Incorrect:
+                    <span id="incorrectCount"></span>
+                </p>
+
+                <p>
+                    Unattempted:
+                    <span id="unattemptedCount"></span>
+                </p>
+
+            </div>
             <button id="reattempt">
                 Try Again
             </button>
 
         </div>
     </div>
-
     <script src="script.js"></script>
 
 </body>

@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,9 +28,7 @@
             <input
                 id="username"
                 type="text"
-                placeholder="Enter your name"
-                autocomplete="name"
-                aria-label="Enter your name">
+                placeholder="Enter your name">
 
             <button id="startBtn">Start Challenge</button>
         </div>
@@ -37,16 +36,16 @@
 
     <div class="quiz" id="quiz">
 
-        <nav aria-label="Quiz navigation">
+        <nav>
             <b>CAMPORA</b>
 
             <span id="name"></span>
 
-            <span id="timer" aria-live="polite">
+            <span id="timer">
                 Time: 10:00
             </span>
 
-            <button id="themeToggle" aria-label="Toggle light and dark mode">
+            <button id="themeToggle">
                 Light Mode
             </button>
         </nav>
@@ -55,8 +54,7 @@
 
         <div
             class="progress-bar"
-            id="progressBar"
-            aria-label="Question progress">
+            id="progressBar">
         </div>
 
         <div class="status-bar">
@@ -65,11 +63,11 @@
             <button id="reviewed">For Review: 0</button>
         </div>
 
-        <h2 id="question" aria-live="polite">
+        <h2 id="question">
             Question
         </h2>
 
-        <div id="options" aria-label="Answer options"></div>
+        <div id="options"></div>
 
         <button id="review">Mark for Review</button>
         <button id="next">Next Question</button>
@@ -103,3 +101,4 @@
 </body>
 
 </html>
+```

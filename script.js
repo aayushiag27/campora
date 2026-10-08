@@ -101,15 +101,21 @@ function showQuestion() {
         `Review: ${marked.filter(Boolean).length}`;
 
     progressBar.innerHTML = questions.map((_, i) => {
+
         let status = marked[i]
             ? "reviewed"
             : answered[i]
                 ? "attempted"
                 : "unattempted";
 
+        if (i === current) {
+            status += " active";
+        }
+
         return `<button class="${status}" data-index="${i}">
             ${i + 1}
         </button>`;
+
     }).join("");
 
     progressBar.querySelectorAll("button").forEach(btn => {
@@ -259,19 +265,15 @@ reattempt.onclick = () => {
     current = 0;
     score = 0;
     time = 600;
-
-    answered.fill(false);
+     answered.fill(false);
     marked.fill(false);
     selectedAnswers.fill("");
-
-    timer.textContent = "10:00";
-
-    result.style.display = "none";
+ timer.textContent = "10:00";
+ result.style.display = "none";
     quiz.style.display = "block";
 
     showQuestion();
 };
-
 themeToggle.onclick = () => {
     document.body.classList.toggle("light");
 

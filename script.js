@@ -246,10 +246,10 @@ setInterval(() => {
     timer.textContent =
         `${min}:${sec < 10 ? "0" : ""}${sec}`;
 
-    saveProgress();
-
     if (time === 0) {
         endQuiz();
+    } else {
+        saveProgress();
     }
 }, 1000);
 

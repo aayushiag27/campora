@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
 </head>
 
 <body>
-    <video class="bg-video" autoplay muted loop playsinline aria-hidden="true">
+    <video class="bg-video" autoplay muted loop playsinline>
         <source src="bg.mp4" type="video/mp4">
     </video>
 
@@ -18,93 +19,50 @@
     <div class="login-container" id="login">
         <div class="login-card">
             <div class="logo">CAMPORA</div>
-
             <h1>Welcome to CAMPORA</h1>
-
-            <p>
-                Test your AKGEC knowledge and challenge yourself!
-            </p>
+            <p>Test your AKGEC knowledge and challenge yourself!</p>
 
             <label for="username">Enter your name</label>
-
             <input id="username" type="text" placeholder="Enter your name">
 
-            <button id="startBtn">
-                Start Challenge
-            </button>
+            <button id="startBtn" disabled>Start Challenge</button>
         </div>
     </div>
 
     <div class="quiz" id="quiz">
         <nav>
             <b>CAMPORA</b>
-
             <span id="name"></span>
-
-            <span id="timer">Time: 10:00</span>
-
+            <span id="timer">10:00</span>
             <button id="themeToggle">Light Mode</button>
         </nav>
 
         <p id="number">Question 1 of 10</p>
 
-        <div class="progress-bar" id="progressBar"></div>
-
         <div class="status-bar">
             <button id="attempted">Attempted: 0</button>
-
             <button id="unattempted">Unattempted: 10</button>
-
             <button id="reviewed">For Review: 0</button>
         </div>
 
         <h2 id="question">Question</h2>
-
         <div id="options"></div>
 
-        <div class="question-palette">
-            <h3>Question Palette</h3>
-
-            <div id="questionPalette"></div>
-
-            <div class="palette-legend">
-                <span><i class="answered"></i> Answered</span>
-                <span><i class="unanswered"></i> Unanswered</span>
-                <span><i class="reviewed"></i> For Review</span>
-                <span><i class="not-visited"></i> Not Visited</span>
-            </div>
-        </div>
-
         <button id="review">Mark for Review</button>
-
         <button id="next">Next Question</button>
-
         <button id="endTest">Finish Challenge</button>
     </div>
 
     <div class="result" id="result">
         <div class="result-card">
             <h1>Challenge Completed!</h1>
-
             <h2 id="finalScore"></h2>
-
             <p id="resultMessage"></p>
 
             <div class="summary">
-                <p>
-                    Correct:
-                    <span id="correctCount"></span>
-                </p>
-
-                <p>
-                    Incorrect:
-                    <span id="incorrectCount"></span>
-                </p>
-
-                <p>
-                    Unattempted:
-                    <span id="unattemptedCount"></span>
-                </p>
+                <p>Correct: <span id="correctCount"></span></p>
+                <p>Incorrect: <span id="incorrectCount"></span></p>
+                <p>Unattempted: <span id="unattemptedCount"></span></p>
             </div>
 
             <button id="reattempt">Try Again</button>
